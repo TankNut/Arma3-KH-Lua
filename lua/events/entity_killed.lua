@@ -8,5 +8,3 @@ elseif sqf.isNull(instigator) then
 end
 
 printf("%s was killed by %s", sqf.name(killed), sqf.name(instigator))
-
-sqf.lockInventory(killed, true)
