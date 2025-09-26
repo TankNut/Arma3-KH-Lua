@@ -1,0 +1,31 @@
+class CfgLuaFunctions
+{
+	class LuaActions
+	{
+		prefix = "LuaAction";
+		path = "lua\actions\";
+
+		class jump {};
+	};
+
+	class LuaEvents
+	{
+		prefix = "LuaEvent";
+		path = "lua\events\";
+
+		class entity_killed {};
+		class inventory_opened {};
+	};
+
+	class Lua
+	{
+		prefix = "Lua";
+		path = "lua\";
+
+		class type {preInit = 1};
+		class vector {preInit = 1};
+		class utils {preInit = 1};
+
+		class _postinit {postInit = 1};
+	};
+};
