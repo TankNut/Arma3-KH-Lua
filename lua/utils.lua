@@ -19,19 +19,19 @@ end
 function AddAction(object, title, script, args, ...)
 	local code = string.format([[params ["_target", "_caller", "_actionId", "_arguments"]; [_target, _caller, _actionId, _arguments] luaExecute "LuaAction_Fnc_%s"]], script)
 
-	sqf.addAction(object, {title, code, args or {}, ...})
+	return sqf.addAction(object, {title, code, args or {}, ...})
 end
 
 function EventHandler(object, name, script, parameterCount)
 	local sqfParams, params = formatParameters(parameterCount)
 	local code = string.format([[params [%s]; [%s] luaExecute "LuaEvent_Fnc_%s"]], sqfParams, params, script)
 
-	sqf.addEventHandler(object, {name, code})
+	return sqf.addEventHandler(object, {name, code})
 end
 
 function MissionEventHandler(name, script, parameterCount)
 	local sqfParams, params = formatParameters(parameterCount)
 	local code = string.format([[params [%s]; [%s] luaExecute "LuaEvent_Fnc_%s"]], sqfParams, params, script)
 
-	sqf.addMissionEventHandler({name, code})
+	return sqf.addMissionEventHandler({name, code})
 end
