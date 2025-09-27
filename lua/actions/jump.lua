@@ -16,5 +16,5 @@ if trace then
 
 	sqf.setPosASL(ply, groundTrace[1])
 else
-	printf("No position found to jump to!")
+	print("No position found to jump to!")
 end

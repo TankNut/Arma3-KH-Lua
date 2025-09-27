@@ -1,3 +1,7 @@
+function printf(...)
+	print(string.format(...))
+end
+
 local function formatParameters(count)
 	local sqfParams = {}
 	local params = {}

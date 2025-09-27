@@ -1,7 +1,3 @@
-function printf(...)
-	sqf.systemChat(string.format(...))
-end
-
 local ply = sqf.player()
 
 sqf.addAction(ply, {"Jump", [[

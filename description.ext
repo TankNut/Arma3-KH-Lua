@@ -3,7 +3,7 @@ class CfgLuaFunctions
 	class LuaActions
 	{
 		prefix = "LuaAction";
-		path = "lua\actions\";
+		path = "lua\actions";
 
 		class jump {};
 	};
@@ -11,7 +11,7 @@ class CfgLuaFunctions
 	class LuaEvents
 	{
 		prefix = "LuaEvent";
-		path = "lua\events\";
+		path = "lua\events";
 
 		class entity_killed {};
 		class inventory_opened {};
@@ -20,7 +20,7 @@ class CfgLuaFunctions
 	class Lua
 	{
 		prefix = "Lua";
-		path = "lua\";
+		path = "lua";
 
 		class type {preInit = 1};
 		class vector {preInit = 1};
