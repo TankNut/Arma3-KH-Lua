@@ -8,24 +8,31 @@ class CfgLuaFunctions
 		class jump {};
 	};
 
-	class LuaEvents
-	{
-		prefix = "LuaEvent";
-		path = "lua\events";
-
-		class entity_killed {};
-		class inventory_opened {};
-	};
-
 	class Lua
 	{
 		prefix = "Lua";
 		path = "lua";
+
+		class fuck {};
 
 		class type {preInit = 1;};
 		class utils {preInit = 1;};
 		class vector {preInit = 1;};
 
 		class _postinit {postInit = 1;};
+	};
+
+	class LuaScavenger
+	{
+		prefix = "Scavenger";
+		path = "lua\scavenger";
+
+		class hold_check {};
+		class completed {};
+
+		class entity_killed {};
+		class inventory_opened {};
+
+		class _postinit {postInit = 1;}
 	};
 };
