@@ -7,6 +7,10 @@ elseif sqf.isNull(instigator) then
 	instigator = killer
 end
 
+if not sqf.isKindOf(killed, "CAManBase") then
+	return
+end
+
 printf("%s was killed by %s", sqf.name(killed), sqf.name(instigator))
 
 local function getLoadoutClasses(unit)
