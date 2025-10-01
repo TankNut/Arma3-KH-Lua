@@ -1,5 +1,4 @@
-local args = {...}
-local caller, target = args[1], args[2]
+local caller, target = ...
 
 printf("%s has finished looting %s", sqf.name(caller), sqf.name(target))
 

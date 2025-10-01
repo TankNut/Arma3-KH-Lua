@@ -1,5 +1,4 @@
-local args = {...}
-local _, primary, _ = args[1], args[2], args[3]
+local _, primary, _ = ...
 
 if sqf.isKindOf(primary, "CAManBase") and not sqf.alive(primary) then
 	return true

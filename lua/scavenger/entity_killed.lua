@@ -1,5 +1,4 @@
-local args = {...}
-local killed, killer, instigator = args[1], args[2], args[3]
+local killed, killer, instigator = ...
 
 if sqf.isNull(instigator) then
 	instigator = sqf.UAVControl(sqf.Vehicle(killer))[1]
