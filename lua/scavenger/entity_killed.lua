@@ -37,7 +37,7 @@ sqf.removeAllWeapons(killed)
 
 sqf.setVariable(killed, {"Scavenger_Data", getLoadoutClasses(killed)})
 
-local holdActionID = SQF_FunctionCall({
+local holdActionID = sqf.call("BIS_fnc_holdActionAdd", {
 	killed, "Scavenge",
 	"\\a3\\missions_f_oldman\\data\\img\\holdactions\\holdAction_box_ca.paa",
 	"\\a3\\missions_f_oldman\\data\\img\\holdactions\\holdAction_box_ca.paa",
@@ -52,14 +52,15 @@ local holdActionID = SQF_FunctionCall({
 	0, -- Priority
 	false, -- Remove on completion
 	false -- Show while unconscious
-}, "BIS_fnc_holdActionAdd")
+})
 
-sqf.setVariable(killed, {"Scavenger_ActionID", holdActionID})
+local event = "Scavenger_" .. sqf.hashValue(killed)
+local eventID
 
-SQF_FunctionCall({
-	"Scavenger_" .. sqf.hashValue(killed),
-	sqf.compile([[
-		[_thisType, _thisId] call CBA_fnc_removeEventHandler;
-		[_this, (_this getVariable "Scavenger_ActionID")] call BIS_fnc_holdActionRemove;
-	]]), holdActionID
-}, "CBA_fnc_addEventHandlerArgs")
+eventID = add_event_handler(event, function(unit)
+	remove_event_handler(event, eventID)
+
+	sqf.call("BIS_fnc_holdActionRemove", {
+		unit, holdActionID
+	})
+end)
