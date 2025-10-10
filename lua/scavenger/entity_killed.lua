@@ -34,21 +34,20 @@ local function getLoadoutClasses(unit)
 	return tab
 end
 
-sqf.removeAllWeapons(killed)
-
 -- Process loadout classes into data, return if nothing applicable is found (no weapons, ammo or supplies)
 
 sqf.setVariable(killed, {"Scavenger_Data", getLoadoutClasses(killed)})
+sqf.removeAllWeapons(killed)
 
 local holdActionID = sqf.call("BIS_fnc_holdActionAdd", {
 	killed, "Scavenge",
 	"\\a3\\missions_f_oldman\\data\\img\\holdactions\\holdAction_box_ca.paa",
 	"\\a3\\missions_f_oldman\\data\\img\\holdactions\\holdAction_box_ca.paa",
-	[[[_this, _target] luaExecute "Scavenger_Fnc_hold_check"]],
+	[[[_this, _target] luaExecute "Scavenger_Hold_Check"]],
 	[[_caller distance _target < 3;]],
 	sqf.compile([[params ["_target", "_caller"]; _target setVariable ["Scavenger_Hold", getPlayerUID _caller, true];]]), -- Start
 	nil, -- Progress
-	sqf.compile([[params ["_target", "_caller"]; [_caller, _target] luaExecute "Scavenger_Fnc_completed"]]), -- Completion
+	sqf.compile([[params ["_target", "_caller"]; [_caller, _target] luaExecute "Scavenger_Completed"]]), -- Completion
 	sqf.compile([[params ["_target"]; _target setVariable ["Scavenger_Hold", false, true];]]), -- Abort
 	{}, -- Args
 	4, -- Time
@@ -57,13 +56,11 @@ local holdActionID = sqf.call("BIS_fnc_holdActionAdd", {
 	false -- Show while unconscious
 })
 
-local event = "Scavenger_" .. sqf.hashValue(killed)
+local eventName = "Scavenger_" .. sqf.hashValue(killed)
 local eventID
 
-eventID = add_event_handler(event, function(unit)
-	remove_event_handler(event, eventID)
+eventID = event.add(eventName, function()
+	event.remove(eventName, eventID)
 
-	sqf.call("BIS_fnc_holdActionRemove", {
-		unit, holdActionID
-	})
+	sqf.call("BIS_fnc_holdActionRemove", {killed, holdActionID})
 end)

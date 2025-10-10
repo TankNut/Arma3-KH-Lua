@@ -2,7 +2,7 @@ local caller, target = ...
 
 printf("%s has finished looting %s", sqf.name(caller), sqf.name(target))
 
-EmitEvent("Scavenger_" .. sqf.hashValue(target), target, "GLOBAL")
+event.trigger("Scavenger_" .. sqf.hashValue(target), "GLOBAL", false, target)
 
 local loadout = sqf.getVariable(target, "Scavenger_Data")
 
